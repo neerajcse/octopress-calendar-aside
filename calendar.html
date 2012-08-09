@@ -1,0 +1,142 @@
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  {% for post in site.posts limit: site.recent_posts %}
+  highlightArray.push('{{ post.date|date : "%m/%d/%Y") }}');
+  hightlightLinks.push('{{ root_url }}{{ post.url }}');
+  {% endfor %}		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
