@@ -20,7 +20,7 @@ And voila, just do a rake generate and push your blog code, you should see the c
 About the author:
 
 Neeraj Kumar is an Engineer working for the Gmail team at Google,India.
-A coffee/tea addict, he loves reading about HCI techniques and you would find his new HTML5 baked blog at http://titansturf.in
+A coffee/tea addict, he loves reading about HCI techniques and you would find his new HTML5 baked blog at http://neerajkumar.net
 
 He also likes to work on creating mobile applications, and has had a few stints with phonegap and native android development.
 
